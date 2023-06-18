@@ -15,27 +15,28 @@ func main() {
 	// chosen := selector(options),
 	fmt.Println("Rock paper or scissor? (Enter q to exit)")
 	for true {
-	userInput := choice()
-	if userInput == "q" {
-		println("Sad to see you go")
-		os.Exit(0)
-	} 
-	for !contains(options, userInput) {
-		fmt.Println("Input not valid try again")
-		userInput = choice()
-	}
+		userInput := choice()
+		if userInput == "q" {
+			println("Sad to see you go")
+			os.Exit(0)
+		}
+		for !contains(options, userInput) {
+			fmt.Println("Input not valid try again")
+			userInput = choice()
+		}
 
-	fmt.Println("Valid input.")
-	m := selector(options)
-	res := whowon(m, userInput)
-	println(res)
-	println("Wanna play again (y/n)")
-	playAgain := choice()
-	if playAgain != "y" {
-		break
+		fmt.Println("Valid input.")
+		m := selector(options)
+		res := whowon(m, userInput)
+		println(res)
+		println("Wanna play again (y/n)")
+		playAgain := choice()
+		if playAgain != "y" {
+			break
+		}
 	}
 }
-}
+
 func selector(possibilities []string) string {
 	rand.Seed(time.Now().UnixNano())
 	pick := possibilities[rand.Intn(len(possibilities))]
@@ -44,7 +45,6 @@ func selector(possibilities []string) string {
 }
 
 func choice() string {
-
 	reader := bufio.NewReader(os.Stdin)
 	str, err := reader.ReadString('\n')
 	if err != nil {
